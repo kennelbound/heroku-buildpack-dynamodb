@@ -1,16 +1,20 @@
 #!/bin/sh
 
-indent() {
-  sed -u 's/^/       /'
-}
+set -e
 
-echo "-----> Found a hello.txt"
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
 
-# if hello.txt is empty, abort the build
-if [ ! -s $1/hello.txt ]; then
-  echo "hello.txt was empty" | indent
-  exit 1
-fi
+# Buildpack URL
+URL=http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.zip
+DIR=DynamoDBLocal
 
-# replace hello with goodbye in a new file
-cat $1/hello.txt | sed -e "s/[Hh]ello/Goodbye/g" > $1/goodbye.txt
+cd $BUILD_DIR
+mkdir -p $DIR
+curl -s -L http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz -o ./${DIR}/dynamodb_local_latest.tar.gz
+
+echo "-----> Extracting DyanmoDBLocal"
+tar zxvf $DIR/dynamodb_local_latest.tar.gz -C $DIR
+
+echo "-----> Success"
