@@ -6,9 +6,12 @@ set -e
 BUILD_DIR=$1
 CACHE_DIR=$2
 
-# Buildpack URL
+# DynamoDB jars and libs
 URL=http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.zip
 DIR=DynamoDBLocal
+
+echo "-----> Deploying library js into root $BUILD_DIR/"
+cp ../dynamodb.local.js $BUILD_DIR/
 
 cd $BUILD_DIR
 mkdir -p $DIR
@@ -16,5 +19,8 @@ curl -s -L http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_loc
 
 echo "-----> Extracting DyanmoDBLocal"
 tar zxvf $DIR/dynamodb_local_latest.tar.gz -C $DIR
+
+echo "-----> Adding dynamo.local.js here."
+
 
 echo "-----> Success"
