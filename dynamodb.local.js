@@ -5,7 +5,8 @@ var exec = require('child_process').exec;
 var port = env.DB_PORT || 8001;
 
 // Execute some command with process.env and my custom variables
-var command = 'java -Djava.library.path=DynamoDBLocal_lib -jar DynamoDBLocal/DynamoDBLocal.jar" +' +
+var command = 'java -Djava.library.path=DynamoDBLocal_lib" +' +
+    ' -jar DynamoDBLocal/DynamoDBLocal.jar' +
     ' -port ' + port +
     ' -optimizeDbBeforeStartup' +
     ' -dbPath DynamoDBLocal';
