@@ -10,6 +10,7 @@ CACHE_DIR=$2
 URL=http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.zip
 DIR=DynamoDBLocal
 
+pwd=$(pwd)
 echo "-----> Deploying library js into root $BUILD_DIR/ from $pwd"
 cp ../dynamodb.local.js $BUILD_DIR/
 
